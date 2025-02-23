@@ -23,7 +23,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Insert bot token
-        run: sed -i 's|<bot_tokenl>|${{ secrets.BOT_TOKEN }}|' src/main/resources/application.properties
+        run: sed -i 's|<bot_token>|${{ secrets.BOT_TOKEN }}|' src/main/resources/application.properties
 
       # Build Maven project
       - name: Build with Maven

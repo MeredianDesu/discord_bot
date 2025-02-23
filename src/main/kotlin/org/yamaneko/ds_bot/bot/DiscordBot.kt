@@ -20,7 +20,6 @@ class DiscordBot(
     private lateinit var token: String
 
     init {
-        println("==== TOKEN ==== : $token")
         jda = JDABuilder.createDefault(
             token,
             GatewayIntent.GUILD_MESSAGES, // read msg in guilds
