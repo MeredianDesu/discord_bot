@@ -15,15 +15,13 @@ class DiscordBot(
     startingBot: StartingBot,
     @Value("\${bot_token}") val token: String
 ): ListenerAdapter() {
-    private lateinit var jda: JDA
+    private var jda: JDA = JDABuilder.createDefault(
+        token,
+        GatewayIntent.GUILD_MESSAGES, // read msg in guilds
+        GatewayIntent.MESSAGE_CONTENT, // read msg content
+    ).addEventListeners(this, messagesResponse, startingBot).build()
 
     init {
-        val jda: JDA = JDABuilder.createDefault(
-            token,
-            GatewayIntent.GUILD_MESSAGES, // read msg in guilds
-            GatewayIntent.MESSAGE_CONTENT, // read msg content
-        ).addEventListeners(this, messagesResponse, startingBot).build()
-
         jda.awaitReady()
     }
 
