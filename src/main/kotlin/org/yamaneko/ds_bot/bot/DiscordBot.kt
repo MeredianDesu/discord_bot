@@ -13,17 +13,14 @@ import org.yamaneko.ds_bot.StartingBot
 class DiscordBot(
     messagesResponse: MessagesResponse,
     startingBot: StartingBot,
+    @Value("\${bot_token}") val token: String
 ): ListenerAdapter() {
     private lateinit var jda: JDA
 
-    @Value("\${bot_token}")
-    private lateinit var token: String
-
     init {
-        jda = JDABuilder.createDefault(
+        val jda: JDA = JDABuilder.createDefault(
             token,
             GatewayIntent.GUILD_MESSAGES, // read msg in guilds
-//            GatewayIntent.DIRECT_MESSAGES, // read dms
             GatewayIntent.MESSAGE_CONTENT, // read msg content
         ).addEventListeners(this, messagesResponse, startingBot).build()
 
