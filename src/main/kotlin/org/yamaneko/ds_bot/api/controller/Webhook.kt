@@ -1,5 +1,7 @@
 package org.yamaneko.ds_bot.api.controller
 
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -10,6 +12,11 @@ import org.yamaneko.ds_bot.dto.ReleaseDTO
 @RestController
 @RequestMapping("webhook")
 class Webhook(private val bot: DiscordBot) {
+
+    @GetMapping("")
+    fun helloWord(): ResponseEntity<String> {
+        return ResponseEntity.ok("Hello, world!")
+    }
 
     @PostMapping("releases")
     fun handleRelease(@RequestBody request: ReleaseDTO) {
